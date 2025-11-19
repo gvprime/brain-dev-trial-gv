@@ -1,0 +1,79 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Transcript {
+  id            String   @id @default(cuid())
+  title         String
+  transcript    String   @db.Text
+  summary       String?
+  sentiment     String?
+  extractedJson Json?
+  createdAt     DateTime @default(now())
+
+  participants  TranscriptParticipant[]
+  topics        TopicOnTranscript[]
+  actionItems   ActionItem[]
+  embedding     Embedding?
+}
+
+model Participant {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  role      String?
+
+  transcripts TranscriptParticipant[]
+  actionItems ActionItem[]     @relation("Assignee")
+}
+
+model TranscriptParticipant {
+  transcriptId  String
+  participantId String
+
+  transcript    Transcript   @relation(fields: [transcriptId], references: [id])
+  participant   Participant  @relation(fields: [participantId], references: [id])
+
+  @@id([transcriptId, participantId])
+  @@index([participantId])
+}
+
+model Topic {
+  id        String   @id @default(cuid())
+  name      String   @unique
+
+  transcripts TopicOnTranscript[]
+}
+
+model TopicOnTranscript {
+  transcriptId String
+  topicId      String
+
+  transcript   Transcript @relation(fields: [transcriptId], references: [id])
+  topic        Topic      @relation(fields: [topicId], references: [id])
+
+  @@id([transcriptId, topicId])
+}
+
+model ActionItem {
+  id           String      @id @default(cuid())
+  description  String
+  assigneeId   String?
+  dueDate      DateTime?
+
+  transcriptId String
+  transcript   Transcript  @relation(fields: [transcriptId], references: [id])
+  assignee     Participant? @relation("Assignee", fields: [assigneeId], references: [id])
+}
+
+model Embedding {
+  id           String   @id @default(cuid())
+  vector       String   @db.Text
+  transcriptId String   @unique
+  transcript   Transcript @relation(fields: [transcriptId], references: [id])
+}

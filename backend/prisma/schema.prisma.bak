@@ -1,0 +1,49 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/prisma/client"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Transcript {
+  id            String   @id @default(cuid())
+  title         String
+  participants  String[] // simple for MVP, we resolve later
+  transcript    String   @db.Text
+  summary       String?
+  sentiment     String?
+  extractedJson Json     // full extracted object
+  embedding     String   // JSON string of vector (1536 numbers)
+  createdAt     DateTime @default(now())
+
+  topics        TopicOnTranscript[]
+  actionItems   ActionItem[]
+}
+
+model Topic {
+  id          String              @id @default(cuid())
+  name        String              @unique
+  transcripts TopicOnTranscript[]
+}
+
+model TopicOnTranscript {
+  transcript   Transcript @relation(fields: [transcriptId], references: [id])
+  transcriptId String
+  topic        Topic      @relation(fields: [topicId], references: [id])
+  topicId      String
+
+  @@id([transcriptId, topicId])
+}
+
+model ActionItem {
+  id           String     @id @default(cuid())
+  description  String
+  assignee     String?
+  dueDate      DateTime?
+  completed    Boolean    @default(false)
+  transcript   Transcript @relation(fields: [transcriptId], references: [id])
+  transcriptId String
+}
