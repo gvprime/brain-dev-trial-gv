@@ -7,7 +7,7 @@ Frontend → http://localhost:3000
 Backend API → http://localhost:4000
 
 **4-minute walkthrough**  
-[[ILoom link here]](https://www.loom.com/share/99ccb2065bb849878a8527720fc8ee18)
+https://www.loom.com/share/99ccb2065bb849878a8527720fc8ee18
 
 ## Implemented (100% spec-compliant)
 
@@ -40,48 +40,3 @@ npx tsx src/index.ts
 # Frontend (new terminal)
 cd frontend
 npm run dev
-Design Decisions & Trade-offs
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-ChoiceWhy I chose itTrade-off / Next improvementExpress + tsxFastest iteration, zero boilerplateCould migrate to NestJS for large teamSQLite + PrismaZero-setup, perfect for trialProduction → PostgreSQL + pgvectorReal OpenAI (no mocks)Shows real prompt engineering + cost awarenessAdded bulletproof date parser for reliabilityNext.js 14 App RouterBest DX + built-in API routesCould add React Query for advanced cachingSimple cosine in-memoryFast, readable, works perfectly for <10k itemsScale → dedicated vector DB (Weaviate/Pinecone)
-With more time I’d add:
-
-Zod validation + error boundaries
-Participant fuzzy deduplication (“Mike” ↔ “Michael Rodriguez”)
-Dark mode + filters in dashboard
-Docker Compose + Vercel/Railway deployment
-
-Thanks for the great trial — really excited to talk!
