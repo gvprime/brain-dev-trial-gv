@@ -29,19 +29,6 @@ https://www.loom.com/share/99ccb2065bb849878a8527720fc8ee18
 - Real-time topic frequency bar chart
 - Clean, responsive UI
 
-## Quick Start (30 seconds)
-
-```bash
-# Backend
-cd backend
-cp .env.example .env          # add your OpenAI key
-npx tsx src/index.ts
-
-# Frontend (new terminal)
-cd frontend
-npm run dev
-
-
 ## Design Decisions & Trade-offs
 
 | Choice                  | Why I chose it                               | Trade-off / Next improvement                     |
@@ -57,3 +44,15 @@ With more time I’d add:
 - Participant fuzzy deduplication (“Mike” ↔ “Michael Rodriguez”)
 - Dark mode + filters in dashboard
 - Docker Compose + Vercel/Railway deployment
+  
+## Quick Start (30 seconds)
+
+```bash
+# Backend
+cd backend
+cp .env.example .env          # add your OpenAI key
+npx tsx src/index.ts
+
+# Frontend (new terminal)
+cd frontend
+npm run dev
