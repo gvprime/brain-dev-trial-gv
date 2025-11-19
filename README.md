@@ -7,7 +7,7 @@ Frontend → http://localhost:3000
 Backend API → http://localhost:4000
 
 **4-minute walkthrough**  
-[Insert your Loom link here]
+[[ILoom link here]](https://www.loom.com/share/99ccb2065bb849878a8527720fc8ee18)
 
 ## Implemented (100% spec-compliant)
 
