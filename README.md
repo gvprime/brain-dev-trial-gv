@@ -40,13 +40,15 @@ npx tsx src/index.ts
 # Frontend (new terminal)
 cd frontend
 npm run dev
+
+
 ## Design Decisions & Trade-offs
 
 | Choice                  | Why I chose it                               | Trade-off / Next improvement                     |
 |-------------------------|----------------------------------------------|--------------------------------------------------|
 | Express + tsx           | Fastest iteration, zero boilerplate          | Could migrate to NestJS for large team           |
 | SQLite + Prisma         | Zero-setup, perfect for trial                | Production → PostgreSQL + pgvector               |
-| Real OpenAI (no mocks)  | Shows real prompt engineering & cost awareness | Added bulletproof date parser for reliability    |
+| Real OpenAI (no mocks)  | Shows real prompt engineering + cost awareness | Added bulletproof date parser for reliability    |
 | Next.js 14 App Router   | Best DX + built-in API routes                | Could add React Query for advanced caching       |
 | Simple cosine in-memory | Fast, readable, works perfectly for <10k items| Scale → dedicated vector DB (Weaviate/Pinecone)  |
 
